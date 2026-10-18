@@ -1,0 +1,40 @@
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Operating system and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Node/Python generated files
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+
+# Kubernetes local configuration
+.kube/
+kubeconfig
+
+# Build outputs
+dist/
+build/
+coverage/
