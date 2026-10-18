@@ -21,3 +21,9 @@ variable "vpc_id" {
   type        = string
   default     = "vpc-0888fe51a91227563"
 }
+
+variable "existing_instance_id" {
+  description = "ID of the existing Nexvion EC2 instance"
+  type        = string
+  default     = "i-078481a5597c7d9b4"
+}

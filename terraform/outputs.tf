@@ -17,3 +17,8 @@ output "vpc_id" {
   description = "Existing VPC selected for the project"
   value       = var.vpc_id
 }
+
+output "existing_instance_id" {
+  description = "Existing EC2 instance selected for the project"
+  value       = var.existing_instance_id
+}
