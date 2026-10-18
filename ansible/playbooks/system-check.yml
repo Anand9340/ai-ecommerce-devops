@@ -1,0 +1,44 @@
+
+---
+- name: Nexvion system health and configuration checks
+  hosts: localhost
+  connection: local
+  become: false
+  gather_facts: true
+
+  tasks:
+    - name: Display operating system information
+      ansible.builtin.debug:
+        msg:
+          - "Hostname: {{ ansible_hostname }}"
+          - "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          - "Architecture: {{ ansible_architecture }}"
+
+    - name: Check available root filesystem space
+      ansible.builtin.command: df -h /
+      register: disk_usage
+      changed_when: false
+
+    - name: Display root filesystem usage
+      ansible.builtin.debug:
+        var: disk_usage.stdout_lines
+
+    - name: Check Docker service state
+      ansible.builtin.command: systemctl is-active docker
+      register: docker_state
+      changed_when: false
+      failed_when: false
+
+    - name: Display Docker service state
+      ansible.builtin.debug:
+        msg: "Docker service state: {{ docker_state.stdout | default('unknown') }}"
+
+    - name: Check Jenkins service state
+      ansible.builtin.command: systemctl is-active jenkins
+      register: jenkins_state
+      changed_when: false
+      failed_when: false
+
+    - name: Display Jenkins service state
+      ansible.builtin.debug:
+        msg: "Jenkins service state: {{ jenkins_state.stdout | default('unknown') }}"
