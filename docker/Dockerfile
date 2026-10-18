@@ -1,5 +1,8 @@
 FROM nginx:alpine
 
+# Upgrade Alpine packages to receive security fixes
+RUN apk upgrade --no-cache
+
 COPY application/index.html /usr/share/nginx/html/
 COPY application/products.html /usr/share/nginx/html/
 COPY application/payment.html /usr/share/nginx/html/

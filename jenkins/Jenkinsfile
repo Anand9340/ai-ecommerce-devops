@@ -40,6 +40,20 @@ pipeline {
             }
         }
 
+        stage('Security Scan') {
+            steps {
+                sh '''
+                    set -eu
+                    trivy image \
+                      --scanners vuln \
+                      --severity HIGH,CRITICAL \
+                      --exit-code 1 \
+                      --no-progress \
+                      nexvion-ecommerce:${BUILD_NUMBER}
+                '''
+            }
+        }
+
         stage('Container Smoke Test') {
             steps {
                 sh '''
