@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Validate Project') {
+            steps {
+                sh '''
+                    set -eu
+
+                    test -f docker/Dockerfile
+                    test -f docker/docker-compose.yml
+                    test -f application/index.html
+
+                    bash -n scripts/setup.sh
+                    bash -n scripts/deploy.sh
+                    bash -n scripts/health-check.sh
+                    bash -n scripts/backup.sh
+                    bash -n scripts/cleanup.sh
+
+                    docker compose -f docker/docker-compose.yml config -q
+
+                    echo "Project validation passed."
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Checkout and validation completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed. Check the stage logs.'
+        }
+    }
+}
