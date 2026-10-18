@@ -29,6 +29,20 @@ pipeline {
             }
         }
 
+        stage('Secret Scan') {
+            steps {
+                sh '''
+                    set -eu
+                    gitleaks detect \
+                      --source . \
+                      --redact \
+                      --exit-code 1
+
+                    echo "Secret scan passed."
+                '''
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh '''
