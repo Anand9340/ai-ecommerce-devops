@@ -38,3 +38,4 @@ kubeconfig
 dist/
 build/
 coverage/
+backups/
