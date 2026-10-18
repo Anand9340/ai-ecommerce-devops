@@ -27,3 +27,8 @@ output "existing_vpc_cidr" {
   description = "CIDR block of the existing VPC"
   value       = data.aws_vpc.existing.cidr_block
 }
+
+output "app_security_group_name" {
+  description = "Name of the Terraform-managed application security group"
+  value       = aws_security_group.app.name
+}
