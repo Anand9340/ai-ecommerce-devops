@@ -22,3 +22,8 @@ output "existing_instance_id" {
   description = "Existing EC2 instance selected for the project"
   value       = var.existing_instance_id
 }
+
+output "existing_vpc_cidr" {
+  description = "CIDR block of the existing VPC"
+  value       = data.aws_vpc.existing.cidr_block
+}
