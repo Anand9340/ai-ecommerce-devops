@@ -1,7 +1,8 @@
 services:
   ecommerce:
     build:
-      context: .
+      context: ..
+      dockerfile: docker/Dockerfile
     image: nexvion-ecommerce:1.0
     container_name: nexvion-ecommerce
     restart: unless-stopped

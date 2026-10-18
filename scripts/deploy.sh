@@ -3,11 +3,11 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-cd "$PROJECT_DIR"
-
 echo "=== Deploying Nexvion E-Commerce ==="
 
-sudo docker compose up -d --build
+sudo docker compose \
+  -f "$PROJECT_DIR/docker/docker-compose.yml" \
+  up -d --build
 
 echo "Waiting for the application to start..."
 sleep 3
