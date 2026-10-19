@@ -39,3 +39,8 @@ dist/
 build/
 coverage/
 backups/
+
+# Local logging backups
+logging/*.bak
+logging/*.bak2
+logging/*.broken
