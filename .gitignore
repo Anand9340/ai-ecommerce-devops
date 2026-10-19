@@ -44,3 +44,6 @@ backups/
 logging/*.bak
 logging/*.bak2
 logging/*.broken
+
+# Local Kubernetes secrets
+kubernetes/secret.yaml
