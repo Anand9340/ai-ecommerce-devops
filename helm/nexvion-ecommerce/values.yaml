@@ -1,0 +1,31 @@
+replicaCount: 3
+
+image:
+  repository: docker.io/library/nexvion-ecommerce
+  tag: "1.0"
+  pullPolicy: Never
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: traefik
+  host: nexvion.local
+
+config:
+  appName: "Nexvion E-Commerce"
+  appEnv: "dev"
+  nginxPort: "80"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 128Mi
+
+secret:
+  demoSecret: "replace-before-use"
