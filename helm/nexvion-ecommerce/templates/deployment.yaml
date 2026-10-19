@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "nexvion-ecommerce.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Release.Name }}
+    app: {{ include "nexvion-ecommerce.fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -14,11 +14,11 @@ spec:
       maxUnavailable: 0
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ include "nexvion-ecommerce.fullname" . }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ include "nexvion-ecommerce.fullname" . }}
     spec:
       containers:
         - name: nexvion-ecommerce
@@ -29,7 +29,7 @@ spec:
               containerPort: 80
           envFrom:
             - configMapRef:
-                name: {{ .Release.Name }}-config
+                name: {{ include "nexvion-ecommerce.fullname" . }}-config
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           startupProbe:

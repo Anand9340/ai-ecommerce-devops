@@ -29,3 +29,5 @@ resources:
 
 secret:
   demoSecret: "replace-before-use"
+
+nameOverride: nexvion-helm-test
